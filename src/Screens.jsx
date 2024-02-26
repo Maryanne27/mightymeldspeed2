@@ -18,10 +18,19 @@ export const possibleTileContents = [
 
 export function StartScreen({ start }) {
   return (
-    <div>
-      <button onClick={start} className="bg-gray-400 text-white p-3">
-        Play
-      </button>
+    <div className="min-h-screen flex flex-col justify-center items-center">
+      <div className="rounded-md text-center bg-pink-50 w-[320px] mx-auto px-12 pt-12 pb-[100px]">
+        <h2 className="text-pink-500 font-bold text-[32px] pb-4">Memory</h2>
+        <p className="text-pink-500 pb-10 font-medium text-[15px]">
+          Flip over tiles looking for pairs
+        </p>
+        <button
+          onClick={start}
+          className="bg-gradient-to-b from-pink-400 to-pink-600 text-white py-1 px-10 text-white mb-2 rounded-full text-center text-xl"
+        >
+          Play
+        </button>
+      </div>
     </div>
   );
 }
@@ -109,12 +118,24 @@ export function PlayScreen({ end }) {
 
   return (
     <>
-      <div>
-        {getTiles(6).map((tile, i) => (
-          <Tile key={i} flip={() => flip(i)} {...tile} />
-        ))}
+      <div className="relative min-h-screen flex flex-col justify-center items-center pt-8">
+        <div className="flex pb-10 text-[14px] gap-2 font-medium text-center">
+          <p className="text-indigo-500 text-[17px]">Tries</p>
+          <div className="flex justify-center items-center">
+            <span className="text-indigo-500 bg-indigo-200 text-[17px] rounded h-[20px] w-[24px] flex justify-center items-center text-center">
+              {tryCount}
+            </span>
+          </div>
+        </div>
+
+        <div className="rounded-md bg-indigo-50 w-[320px] mx-auto p-3">
+          <div className="grid grid-cols-4 justify-center items-center bg-indigo-50 rounded gap-2">
+            {getTiles(16).map((tile, i) => (
+              <Tile key={i} flip={() => flip(i)} {...tile} />
+            ))}
+          </div>
+        </div>
       </div>
-      {tryCount}
     </>
   );
 }
